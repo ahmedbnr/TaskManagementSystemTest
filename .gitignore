@@ -1,0 +1,22 @@
+### IDE ###
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+
+### MAVEN ###
+target/
+
+### LOGS ###
+*.log
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### BACKEND DIRECTORY ###
+Backend/.idea/
+
+### FRONTEND DIRECTORY ###
+
