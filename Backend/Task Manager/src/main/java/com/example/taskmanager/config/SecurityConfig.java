@@ -4,13 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -40,32 +38,23 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers("/h2-console/**", "/api/tasks/**")
                 )
-                // Permit access to H2 console
+                // Permit all requests without authentication
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                // Enable form login for authentication
-                .formLogin(form -> form
-                        .successHandler(customAuthenticationSuccessHandler())
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
     }
 
     @Bean
-    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
-        return new CustomAuthenticationSuccessHandler();
-    }
-
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 }
