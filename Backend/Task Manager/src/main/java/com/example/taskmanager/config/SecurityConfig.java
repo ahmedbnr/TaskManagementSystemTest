@@ -8,9 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
@@ -38,10 +37,19 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 // Enable form login for authentication
-                .formLogin(withDefaults());
+                .formLogin(form -> form
+                        .successHandler(customAuthenticationSuccessHandler())
+                );
+
 
         return http.build();
     }
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
 
     @Bean
     public UserDetailsService userDetailsService() {
