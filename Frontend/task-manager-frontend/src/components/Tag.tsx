@@ -1,16 +1,23 @@
 import React from 'react';
+import Chip from '@mui/material/Chip';
+import { SxProps } from '@mui/system';
 
 // Tag props
 interface TagProps {
   completed: boolean;
+  className?: string;
+  sx?: SxProps;
 }
 
 // Tag Component
-const Tag: React.FC<TagProps> = ({ completed }) => {
+const Tag: React.FC<TagProps> = ({ completed, className, sx }) => {
   return (
-    <span className={`px-2 py-1 rounded text-white ${completed ? 'bg-green-500' : 'bg-red-500'}`}>
-      {completed ? 'Complete' : 'Incomplete'}
-    </span>
+    <Chip
+      label={completed ? 'Completed' : 'Incomplete'}
+      color={completed ? 'success' : 'default'}
+      className={className}
+      sx={sx}
+    />
   );
 };
 

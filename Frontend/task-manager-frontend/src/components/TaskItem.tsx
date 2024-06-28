@@ -1,6 +1,10 @@
 import React from 'react';
 import Tag from './Tag';
-import { Task } from '../types/Task'; // Import the Task type
+import { Task } from '../types/Task';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 // TaskItem props
 interface TaskItemProps {
@@ -27,17 +31,35 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, updateTask, deleteTask }) => 
   };
 
   return (
-    <div className="border p-4 flex justify-between items-center">
-      <div>
-        <h2 className="text-xl font-bold">{task.title}</h2>
-        <p>{task.description}</p>
-        <Tag completed={task.completed} />
-      </div>
-      <div className="space-x-2">
-        <button onClick={handleUpdate} className="bg-yellow-500 text-white p-2 rounded">Toggle Complete</button>
-        <button onClick={handleDelete} className="bg-red-500 text-white p-2 rounded">Delete</button>
-      </div>
-    </div>
+    <Card 
+      className="task-card" 
+      sx={{ 
+        position: 'relative', 
+        borderRadius: '16px', 
+        mb: 2, 
+        borderColor: 'grey.500', 
+        borderWidth: 1, 
+        borderStyle: 'solid' 
+      }}
+    >
+      <Tag completed={task.completed} className="tag" sx={{ position: 'absolute', top: 8, right: 8 }} />
+      <CardContent>
+        <Typography variant="h5" component="div" sx={{ textAlign: 'center', mb: 1 }}>
+          {task.title}
+        </Typography>
+        <Typography variant="body1" color="textSecondary" sx={{ mb: 2 }}>
+          {task.description}
+        </Typography>
+        <div className="buttons" style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+          <Button variant="contained" color="warning" onClick={handleUpdate}>
+           Finish
+          </Button>
+          <Button variant="contained" color="error" onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

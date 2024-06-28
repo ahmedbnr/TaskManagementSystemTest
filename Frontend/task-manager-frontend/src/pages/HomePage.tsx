@@ -3,6 +3,8 @@ import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
 import { fetchTasks, addTask, updateTask, deleteTask } from '../services/taskService';
 import { Task } from '../types/Task';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const HomePage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -51,15 +53,17 @@ const HomePage: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Task Management System</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Task Management System</h1>
       <TaskForm addTask={handleAddTask} />
-      <TaskList tasks={tasks} updateTask={handleUpdateTask} deleteTask={handleDeleteTask} />
+      {loading ? (
+        <div className="flex justify-center mt-4">
+          <CircularProgress />
+        </div>
+      ) : (
+        <TaskList tasks={tasks} updateTask={handleUpdateTask} deleteTask={handleDeleteTask} />
+      )}
     </div>
   );
 };
