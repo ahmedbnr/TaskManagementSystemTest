@@ -6,9 +6,20 @@ This project is a mini-Task Manager application using Spring Boot 3 and React, c
 
 ## Prerequisites
 
+### Backend
+
 - **Java Development Kit (JDK) 19**: Ensure you have JDK 19 installed.
 - **Maven**: This project uses Maven Wrapper, so you do not need to install Maven separately.
 - **Git**: Ensure you have Git installed for cloning the repository.
+
+### Frontend
+
+- **Node.js**: Ensure you have Node.js installed.
+- **Yarn**: Ensure you have Yarn installed. If not, you can install it globally using npm:
+
+```sh
+npm install -g yarn
+```
 
 ## Project Structure
 
@@ -19,6 +30,10 @@ This project is a mini-Task Manager application using Spring Boot 3 and React, c
   - **repository**: Repository interfaces for database operations.
   - **services**: Service classes containing business logic.
 - **Frontend**: Contains the React application.
+  - **components**: Reusable React components (e.g., TaskForm, TaskList, TaskItem, Loader, Notification).
+  - **pages**: Page components (e.g., HomePage).
+  - **services**: Service files for API interactions.
+  - **types**: Type and Model definitions.
 
 ## Getting Started
 
@@ -92,23 +107,45 @@ You can access the H2-Console at:
 https://localhost:8443/h2-console
 ```
 
-### Authentication
-
-The application uses basic authentication with a default in-memory user. The default credentials are:
-
-- **Username**: user
-- **Password**: password
-
 ### Running the Frontend
 
 Navigate to the frontend directory:
+
+```sh
+cd Frontend/task-manager-frontend
+```
+
+#### Install Dependencies
+
+Install the necessary dependencies using yarn:
+
+```sh
+yarn install
+```
+
+#### Create Environment File
+
+Create a `.env` file in the `src` directory with the following content:
+
+```
+REACT_APP_API_URL=https://localhost:8443/api
+```
+
+#### Start the Frontend
+
+To start the frontend application, run:
+
+```sh
+yarn start
+```
+
+The application will be available at `http://localhost:3000`.
 
 ## Additional Information
 
 ### Security Configuration
 
-The security configuration ensures CSRF protection, XSS prevention, and secure headers. The application redirects to the Swagger API upon successful login.
-
+The security configuration ensures CSRF protection, XSS prevention, and secure headers.
 
 ### SSL Configuration
 
