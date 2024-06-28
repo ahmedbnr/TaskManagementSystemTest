@@ -1,9 +1,6 @@
 package com.example.taskmanager.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -13,6 +10,8 @@ public class Tasks {
     private Long id;
     @NotBlank(message = "Please Provide a Title !!")
     private String title;
+    @NotBlank(message = "Please Provide a Description")
+    @Column(length = 1000, nullable = false)
     private String description;
 
     public Long getId() {
