@@ -1,4 +1,3 @@
-```markdown
 # Task Management System Test
 
 ## Overview
@@ -123,4 +122,3 @@ server.ssl.key-alias=selfsigned
 ```
 
 By following these instructions, you should be able to clone, build, and run the Task Manager application successfully.
-```
