@@ -8,7 +8,7 @@ This project is a mini-Task Manager application using Spring Boot 3 and React, c
 
 ### Backend
 
-- **Java Development Kit (JDK) 19**: Ensure you have JDK 19 installed.
+- **Java Development Kit (JDK) 22**: Ensure you have JDK 22 installed.
 - **Maven**: This project uses Maven Wrapper, so you do not need to install Maven separately.
 - **Git**: Ensure you have Git installed for cloning the repository.
 
