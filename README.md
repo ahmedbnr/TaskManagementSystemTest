@@ -125,7 +125,7 @@ yarn install
 
 #### Create Environment File
 
-Create a `.env` file in the `src` directory with the following content:
+Create a `.env` file with the following content:
 
 ```
 REACT_APP_API_URL=https://localhost:8443/api
